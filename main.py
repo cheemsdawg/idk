@@ -1,7 +1,27 @@
-import cvlib as cv
+import csv
+file = "names.csv"
+rows = []
+names = []
+with open(file, 'r') as csvfile:
+  reader = csv.reader(csvfile)
+  for x in reader:
+    rows.append(x)
 
-faces, confidences = cv.detect_face("AEBC9D04-6561-4AD9-988F-55DA62408547.jpeg")
+for row in rows:
+  name = row[0].lower()
+  names.append(name)
+  
+print("scraped")
 
-label, confidence = cv.detect_gender(face)
 
-print(f"{label} : {confidence}")
+def getFem(username):
+  lol = username.replace("_", "")
+  lol = lol.replace(".", "")
+  for x in names:
+    if x in lol and x == "":
+      pass
+    elif x in lol or lol in x:
+      print(f"[log] detected {username}")
+      return
+
+getFem()
